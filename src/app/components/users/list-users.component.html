@@ -1,0 +1,21 @@
+<ul class="table">
+  <li>
+    <div class="cell">Name</div>
+    <div class="cell">Age</div>
+    <div class="cell">Role</div>
+    <div class="cell">Action</div>
+  </li>
+  <li *ngFor="let user of users">
+    <div class="cell">{{ user.name }}</div>
+    <div class="cell">{{ user.age }}</div>
+    <div class="cell">{{ user.role }}</div>
+    <div class="cell"><a [routerLink]="['/users/', user.id]">Edit</a></div>
+  </li>
+</ul>
+
+<div *ngIf="!users">No users!.</div>
+
+<div *ngIf="canEdit" class="add-users">
+<!--  <a routerLink="/users/add">Add New User</a>-->
+  <button routerLink="/users/add/">Add New User</button>
+</div>

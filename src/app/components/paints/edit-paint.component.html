@@ -1,0 +1,33 @@
+<h3>Edit paint</h3>
+
+<ng-container *ngIf="successMessage">
+  {{ successMessage }}
+  <a routerLink="/paints">See Paints</a>
+</ng-container>
+
+<ng-container *ngIf="errorMessage">
+  {{ errorMessage }}
+  <button (click)="errorMessage=undefined">Try editing again!</button>
+</ng-container>
+
+<form *ngIf="!successMessage && !errorMessage && paint"
+      [formGroup]="paintForm"
+      (ngSubmit)="onSubmit()"
+      ngNativeValidate
+>
+  <div class="form-element">
+    <label>Color: {{paint.color}}</label>
+  </div>
+
+  <div class="form-element">
+    <label for="inventory">Inventory: </label>
+    <input id="inventory" type="number" formControlName="inventory" min="0" required/>
+  </div>
+
+  <div *ngIf="authService.canDisplayRunningLow()" class="form-element">
+    <label for="runningLow">Running Low: </label>
+    <input id="runningLow" type="number" formControlName="runningLow" min="0" required/>
+  </div>
+
+  <button [disabled]="paintForm.errors" class="button form-element" type="submit">Edit</button>
+</form>

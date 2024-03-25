@@ -1,0 +1,18 @@
+<ul class="table">
+  <li>
+    <div class="cell">Color</div>
+    <div class="cell">Inventory</div>
+    <div class="cell">Status</div>
+    <div *ngIf="authService.canDisplayRunningLow()" class="cell">Running Low</div>
+    <div *ngIf="authService.canEditPaints()" class="cell">Action</div>
+  </li>
+  <li *ngFor="let paint of paints">
+    <div class="cell">{{ paint.color }}</div>
+    <div class="cell">{{ paint.inventory  }}</div>
+    <div class="cell">{{ paint.status }}</div>
+    <div *ngIf="authService.canDisplayRunningLow()" class="cell">{{ paint.runningLow }}</div>
+    <div *ngIf="authService.canEditPaints()" class="cell"><a [routerLink]="['/paints/', paint.color]">Edit</a></div>
+  </li>
+</ul>
+
+<div *ngIf="!paints">No paints!.</div>

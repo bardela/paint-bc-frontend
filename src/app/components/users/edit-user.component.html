@@ -1,0 +1,38 @@
+<h3>{{user ? "Edit" : "Add"}} user</h3>
+
+<ng-container *ngIf="successMessage">
+  {{ successMessage }}
+  <a routerLink="/users">See Users</a>
+</ng-container>
+
+<ng-container *ngIf="errorMessage">
+  {{ errorMessage }}
+  <button (click)="errorMessage=undefined">Try editing again!</button>
+</ng-container>
+
+<form *ngIf="!successMessage && !errorMessage"
+      [formGroup]="userForm"
+      (ngSubmit)="onSubmit()"
+      ngNativeValidate
+>
+  <div class="form-element">
+    <label for="name">Name: </label>
+    <input id="name" type="text" formControlName="name" required minlength="3" pattern="[a-zA-Z][a-zA-Z ]*"/>
+  </div>
+
+  <div class="form-element">
+    <label for="age">Age: </label>
+    <input id="age" type="number" formControlName="age" min="1" max="100" required/>
+  </div>
+
+  <div class="form-element">
+    <label for="role">Role: </label>
+    <select name="role" formControlName="role" required>
+      <option *ngFor="let roleValue of roles" [ngValue]="roleValue">
+        {{ roleValue }}
+      </option>
+    </select>
+  </div>
+
+  <button class="button form-element" type="submit">{{user ? "Edit" : "Add"}}</button>
+</form>

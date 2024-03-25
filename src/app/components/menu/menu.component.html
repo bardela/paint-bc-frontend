@@ -1,0 +1,13 @@
+<nav class="navbar">
+  <div class="navbar-logo">
+    <a routerLink="/">
+      <img src="assets/logo.png" alt="Painting BC Company" width="100"/>
+    </a>
+  </div>
+  <div class="navbar-links">
+    <ul>
+      <li *ngIf="authService.canViewPaints()" routerLinkActive="active"><a routerLink="/paints">Paints</a></li>
+      <li *ngIf="authService.canAdminUsers()" routerLinkActive="active"><a routerLink="/users">Users</a></li>
+    </ul>
+  </div>
+</nav>

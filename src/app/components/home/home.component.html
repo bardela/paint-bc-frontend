@@ -1,0 +1,19 @@
+<h3>
+  Hello! {{currentUser ? displayUser(currentUser) : "You are not logged in" }}
+</h3>
+<form *ngIf="users"
+      [formGroup]="authForm"
+      (ngSubmit)="onSubmit()"
+      ngNativeValidate
+>
+  <div class="form-element">
+    <label for="userId">Select user to log in as: </label>
+    <select name="userId" formControlName="userId" required>
+      <option *ngFor="let user of users" [ngValue]="user.id">
+        {{ displayUser(user) }}
+      </option>
+    </select>
+  </div>
+
+  <button class="button form-element" type="submit">Log In</button>
+</form>
